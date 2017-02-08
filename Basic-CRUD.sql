@@ -67,4 +67,80 @@ SELECT e.FirstName, e.LastName
   FROM Employees AS e
  WHERE e.DepartmentID <> 4;
 
--- 
+-- 15.	Sort Employees Table
+
+SELECT * FROM Employees AS e
+ ORDER BY e.Salary DESC, e.FirstName, e.LastName DESC, e.MiddleName;
+
+-- 16.	 Create View Employees with Salaries
+
+CREATE VIEW V_EmployeesSalaries AS SELECT e.FirstName, e.LastName, e.Salary FROM Employees AS e;
+
+SELECT * FROM V_EmployeesSalaries;
+
+-- 17.	Create View Employees with Job Titles
+
+CREATE VIEW V_EmployeeNameJobTitle AS
+SELECT e.FirstName + ' ' + 
+	CASE WHEN e.MiddleName IS NULL THEN ''
+	ELSE e.MiddleName
+	END
+	+ ' ' + e.LastName AS 'Full Name', e.JobTitle 
+FROM Employees AS e;
+
+SELECT * FROM V_EmployeeNameJobTitle;
+
+-- 18.	 Distinct Job Titles
+
+SELECT DISTINCT e.JobTitle FROM Employees AS e;
+
+-- 19.	Find First 10 Started Projects
+
+SELECT TOP(10) * FROM Projects AS p
+ ORDER BY p.StartDate, p.Name;
+
+-- 20.	 Last 7 Hired Employees
+
+SELECT TOP(7) e.FirstName, e.LastName, e.HireDate 
+  FROM Employees AS e
+ ORDER BY e.HireDate DESC;
+
+-- 21.	Increase Salaries
+
+UPDATE Employees
+   SET Salary *= 1.12
+ WHERE DepartmentID IN (1, 2, 4, 11);
+
+SELECT e.Salary FROM Employees AS e;
+
+-- 22.	 All Mountain Peaks
+
+USE Geography
+GO 
+
+SELECT P.PeakName FROM Peaks AS p
+ ORDER BY p.PeakName;
+
+-- 23.	 Biggest Countries by Population
+
+SELECT TOP(30) c.CountryName, c.Population 
+  FROM Countries AS c
+ WHERE c.ContinentCode = 'EU'
+ ORDER BY c.Population DESC, c.CountryName;
+
+--24.	 *Countries and Currency (Euro / Not Euro)
+
+SELECT c.CountryName, c.CountryCode, 
+  CASE WHEN c.CurrencyCode='EUR' THEN 'Euro'
+  ELSE 'Not Euro'
+   END AS 'Currency'
+  FROM Countries AS c
+ ORDER BY c.CountryName;
+
+-- 25.	 All Diablo Characters
+
+USE Diablo
+GO
+
+SELECT CH.Name FROM Characters AS CH
+ORDER BY CH.Name;
