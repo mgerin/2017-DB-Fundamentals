@@ -81,3 +81,50 @@ GO
   FROM Games
  WHERE YEAR(Start) IN (2011, 2012)
  ORDER BY Start, Name;
+
+-- Problem 13.	 User Email Providers
+
+SELECT u.Username, RIGHT(u.Email, LEN(u.Email) - CHARINDEX('@', u.Email)) AS 'Email Provider'
+  FROM Users AS u
+ ORDER BY [Email Provider], u.Username;
+
+-- Problem 14.	 Get Users with IPAdress Like Pattern
+
+SELECT u.Username, u.IpAddress 
+  FROM Users AS u
+ WHERE u.IpAddress LIKE '___.1%.%.___'
+ ORDER BY u.Username;
+
+-- Problem 15.	 Show All Games with Duration and Part of the Day
+
+SELECT g.[Name] AS [Game], 
+	   Start = CASE
+				WHEN DATEPART(HOUR, g.Start) >= 0 AND DATEPART(HOUR, g.Start) < 12 THEN 'Morning'
+				WHEN DATEPART(HOUR, g.Start) >=12 AND DATEPART(HOUR, g.Start) < 18 THEN 'Afternoon'
+				ELSE 'Evening'
+				END,
+	   Duration = CASE
+					WHEN g.Duration <= 3 THEN 'Extra Short'
+					WHEN g.Duration >= 4 AND g.Duration<=6 THEN 'Short'
+					WHEN g.Duration > 6 THEN 'Long'
+					ELSE 'Extra Long'
+					END
+	   FROM Games AS g
+	  ORDER BY [Game], Duration, Start;
+
+-- Problem 16.	 Orders Table
+
+CREATE TABLE Orders
+(
+Id INT PRIMARY KEY IDENTITY,
+[Name] NVARCHAR(50),
+OrderDate DATE 
+)
+
+INSERT INTO Orders ([Name], OrderDate) VALUES ('BUTTER', '2016-09-19')
+
+SELECT O.[Name],
+	   O.OrderDate,
+	   DATEADD(DAY, 3, O.OrderDate) AS 'Pay Due',
+	   DATEADD(MONTH, 1, O.OrderDate) AS 'Deliver Due'
+FROM Orders AS O
