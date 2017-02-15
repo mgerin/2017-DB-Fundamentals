@@ -91,3 +91,31 @@ SELECT MIN(a.AverageSalary) AS MinAverageSalary
     FROM Employees AS e
 	   GROUP BY e.DepartmentID
   ) AS a;
+
+
+-- Problem 12.	Highest Peaks in Bulgaria
+
+USE Geography
+GO
+
+SELECT c.CountryCode, m.MountainRange, p.PeakName, p.Elevation FROM Countries AS c
+INNER JOIN MountainsCountries AS mc ON c.CountryCode=mc.CountryCode
+INNER JOIN Mountains AS m ON mc.MountainId=m.Id
+INNER JOIN Peaks AS p ON mc.MountainId=p.MountainId
+WHERE c.CountryCode='BG' AND p.Elevation > 2835
+ORDER BY p.Elevation DESC;
+
+-- Problem 13.	Count Mountain Ranges
+
+SELECT c.CountryCode, COUNT(mc.MountainId) AS MountainRanges FROM Countries AS c
+INNER JOIN MountainsCountries AS mc ON c.CountryCode=mc.CountryCode
+WHERE mc.CountryCode IN ('US', 'RU', 'BG')
+GROUP BY c.CountryCode;
+
+-- Problem 14.	Countries with Rivers
+
+SELECT TOP 5 c.CountryName, r.RiverName FROM Countries AS c
+LEFT OUTER JOIN CountriesRivers AS cr ON c.CountryCode=cr.CountryCode
+LEFT OUTER JOIN Rivers AS r ON cr.RiverId=r.Id
+WHERE c.ContinentCode='AF'
+ORDER BY c.CountryName;
