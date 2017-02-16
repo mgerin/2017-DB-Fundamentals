@@ -119,3 +119,62 @@ LEFT OUTER JOIN CountriesRivers AS cr ON c.CountryCode=cr.CountryCode
 LEFT OUTER JOIN Rivers AS r ON cr.RiverId=r.Id
 WHERE c.ContinentCode='AF'
 ORDER BY c.CountryName;
+
+-- Problem 15.	*Continents and Currencies
+
+SELECT cont.ContinentCode, countr.CurrencyCode, COUNT(countr.CountryCode) AS CurrencyUsage 
+  FROM Continents AS cont
+  JOIN Countries AS countr ON cont.ContinentCode=countr.ContinentCode
+ GROUP BY cont.ContinentCode, countr.CurrencyCode
+HAVING COUNT(countr.CountryCode) = (SELECT MAX(xxx.currencyCN) FROM (SELECT cn.ContinentCode, cnt.CurrencyCode, COUNT(cnt.CountryCode) AS currencyCN FROM Continents AS cn
+														JOIN Countries AS cnt ON cn.ContinentCode=cnt.ContinentCode
+														WHERE cont.ContinentCode = cnt.ContinentCode
+														GROUP BY cn.ContinentCode, cnt.CurrencyCode) AS xxx)
+		AND COUNT(countr.CountryCode) > 1
+ORDER BY cont.ContinentCode;
+
+-- Problem 16.	Countries without any Mountains
+
+SELECT COUNT(countr.CountryCode) AS CountryCode FROM Countries AS countr
+LEFT OUTER JOIN MountainsCountries AS mc ON countr.CountryCode=mc.CountryCode
+LEFT OUTER JOIN Mountains AS m ON mc.MountainId=m.Id
+WHERE m.MountainRange IS NULL;
+
+-- Problem 17.	Highest Peak and Longest River by Country
+
+SELECT TOP 5 c.[CountryName], 
+       MAX(p.[Elevation]) AS 'HighestPeakElevation',
+       MAX(r.[Length]) AS 'LongestRiverLength'
+  FROM [Countries] AS c
+  LEFT JOIN [MountainsCountries] AS mc
+    ON c.[CountryCode] = mc.[CountryCode]
+  LEFT JOIN [Peaks] AS p
+    ON mc.[MountainId] = p.[MountainId]
+  LEFT JOIN [CountriesRivers] AS cr
+    ON c.[CountryCode] = cr.[CountryCode]
+  LEFT JOIN [Rivers] AS r
+    ON cr.[RiverId] = r.[Id]
+ GROUP BY c.[CountryName]
+ORDER BY [HighestPeakElevation] DESC, LongestRiverLength DESC, c.CountryName ASC;
+
+-- Problem 18.	* Highest Peak Name and Elevation by Country
+
+SELECT TOP 5 * FROM (SELECT cntr.CountryName AS Country, p.PeakName AS HighestPeakName, p.Elevation AS HighestPeakElevation, m.MountainRange AS Mountain FROM Countries AS cntr
+INNER JOIN MountainsCountries AS mc ON cntr.CountryCode=mc.CountryCode
+INNER JOIN Mountains AS m ON mc.MountainId=m.Id
+INNER JOIN Peaks AS p ON m.Id=P.MountainId
+INNER JOIN (SELECT c.CountryName, MAX(p.Elevation) AS MaxElevation
+			  FROM Countries AS c
+			  INNER JOIN MountainsCountries AS mc ON c.CountryCode=mc.CountryCode
+			  INNER JOIN Mountains AS m ON mc.MountainId=m.Id
+			  INNER JOIN Peaks AS p ON p.MountainId=m.Id
+			  GROUP BY c.CountryName) AS max_elevation
+			  ON max_elevation.MaxElevation=p.Elevation
+			  AND max_elevation.CountryName=cntr.CountryName
+
+			UNION ALL
+		SELECT c.CountryName AS Country, '(no highest peak)' HighestPeakName, 0 AS HighestPeakElevation, '(no mountain)' AS Mountain FROM Countries AS c
+		LEFT JOIN MountainsCountries AS mc
+		ON c.CountryCode=mc.CountryCode
+		WHERE mc.MountainId IS NULL) AS result
+		ORDER BY Country, HighestPeakName;
