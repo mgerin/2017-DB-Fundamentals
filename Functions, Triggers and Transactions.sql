@@ -44,11 +44,15 @@ CREATE PROC usp_GetEmployeesFromTown(@townName VARCHAR(50))
 AS
 BEGIN
 	SELECT e.FirstName, e.LastName FROM Employees AS e
-	WHERE (SELECT FROM TO)
+	JOIN Addresses AS a ON e.AddressID = a.AddressID
+	JOIN Towns AS t ON a.TownID=t.TownID
+	WHERE t.Name = @townName
 END
 
--- Problem 5.	Salary Level Function
+EXEC dbo.usp_GetEmployeesFromTown 'Sofia'
 
+-- Problem 5.	Salary Level Function
+GO
 CREATE FUNCTION ufn_GetSalaryLevel(@salary MONEY)
 RETURNS NVARCHAR(10)
 AS
@@ -76,12 +80,77 @@ BEGIN
 	WHERE dbo.ufn_GetSalaryLevel(Salary) = @salaryLevel
 END
 
-GO
 
 EXEC dbo.usp_EmployeesBySalaryLevel 'High'
--- Problem 7.	Define Function
 
+-- Problem 7.	Define Function
+GO
+
+CREATE FUNCTION ufn_IsWordComprised(@setOfLetters VARCHAR(MAX), @word VARCHAR(MAX))
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @length INT = LEN(@word)
+	DECLARE @index INT = 1
+
+	WHILE(@index <= @length)
+	BEGIN
+		DECLARE @char CHAR(1) = SUBSTRING(@word, @index, 1)
+		IF (CHARINDEX(@char, @setOfLetters) <= 0)
+		BEGIN
+			RETURN 0
+		END
+		SET @index += 1
+	END
+
+	RETURN 1
+END
+
+SELECT dbo.ufn_IsWordComprised ('oistmiahf', 'Sofia')
+ 
+GO
 -- Problem 8.	* Delete Employees and Departments
+
+ALTER TABLE Departments
+ALTER COLUMN ManagerId INT NULL
+
+SELECT E.EmployeeID FROM Employees AS E
+INNER JOIN Departments AS D ON E.DepartmentID = D.DepartmentID
+WHERE D.Name IN ('Production', 'Production Control')
+
+DELETE FROM EmployeesProjects
+WHERE EmployeeID IN (
+					SELECT E.EmployeeID FROM Employees AS E
+					INNER JOIN Departments AS D ON E.DepartmentID = D.DepartmentID
+					WHERE D.Name IN ('Production', 'Production Control')
+					)
+
+UPDATE Employees
+SET ManagerID = NULL
+WHERE ManagerID IN (
+				   SELECT E.EmployeeID FROM Employees AS E
+				   INNER JOIN Departments AS D ON E.DepartmentID = D.DepartmentID
+				   WHERE D.Name IN ('Production', 'Production Control')
+				   )
+				   
+UPDATE Departments
+SET ManagerID = NULL
+WHERE ManagerID IN (
+					SELECT E.EmployeeID FROM Employees AS E
+					INNER JOIN Departments AS D ON E.DepartmentID = D.DepartmentID
+					WHERE D.Name IN ('Production', 'Production Control')
+					)
+					
+DELETE FROM Employees
+WHERE EmployeeID IN (
+					SELECT E.EmployeeID FROM Employees AS E
+					INNER JOIN Departments AS D ON E.DepartmentID = D.DepartmentID
+					WHERE D.Name IN ('Production', 'Production Control')
+					)
+
+DELETE FROM Departments
+WHERE Name IN ('Production', 'Production Control')
+
 
 -- Problem 9.	Employees with Three Projects
 
@@ -105,14 +174,25 @@ SET @employeeProjectsCount = (SELECT COUNT(*) FROM EmployeesProjects AS ep
 		COMMIT
 END;
 
-DROP PROC udp_AssignProject;S
+DROP PROC udp_AssignProject;
 
 -- Problem 10.	Find Full Name
-
+GO
 USE Bank
 GO
 
 -- Problem 11.	People with Balance Higher Than
+
+CREATE PROCEDURE usp_GetHoldersWithBalanceHigherThan(@sum MONEY)
+AS
+BEGIN
+	SELECT ah.FirstName, ah.LastName FROM AccountHolders AS ah
+	LEFT OUTER JOIN Accounts AS ac ON ah.Id = ac.AccountHolderId
+	GROUP BY FirstName, LastName
+	HAVING SUM(ac.Balance) >= @sum
+END
+
+EXEC dbo.usp_GetHoldersWithBalanceHigherThan 7000
 
 -- Problem 12.	Future Value Function
 
