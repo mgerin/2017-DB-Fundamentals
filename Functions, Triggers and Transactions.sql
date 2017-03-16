@@ -1,4 +1,16 @@
+USE SoftUni
+GO
+
+CREATE PROC usp_AddNumbers
+	@firstNumber SMALLINT,
+	@secondNumber SMALLINT,
+	@result INT OUTPUT
+
+AS
+BEGIN
 -- Problem 1.	Employees with Salary Above 35000
+
+
 
 -- Problem 2.	Employees with Salary Above Number
 
