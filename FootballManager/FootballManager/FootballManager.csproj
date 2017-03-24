@@ -54,7 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FMContext.cs" />
     <Compile Include="FootballManagerContext.cs" />
+    <Compile Include="Models\League.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Team.cs" />
