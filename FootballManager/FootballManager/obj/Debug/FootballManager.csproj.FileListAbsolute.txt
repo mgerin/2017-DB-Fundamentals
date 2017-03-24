@@ -1,0 +1,1 @@
+c:\users\marvik-pc\documents\visual studio 2015\Projects\FootballManager\FootballManager\bin\Debug\FootballManager.exe.config
