@@ -1,2 +1,11 @@
 c:\users\marvik-pc\documents\visual studio 2015\Projects\FootballManager\FootballManager\bin\Debug\FootballManager.exe.config
 C:\Users\Marin\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\FootballManager.exe.config
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\FootballManager.exe
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\FootballManager.pdb
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\EntityFramework.dll
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\EntityFramework.xml
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\obj\Debug\FootballManager.csprojResolveAssemblyReference.cache
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\obj\Debug\FootballManager.exe
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\FootballManager\FootballManager\obj\Debug\FootballManager.pdb

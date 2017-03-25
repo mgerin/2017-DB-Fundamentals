@@ -1,4 +1,6 @@
-﻿namespace FootballManager
+﻿using FootballManager.Models;
+
+namespace FootballManager
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +12,12 @@
     {
         static void Main()
         {
+            var context = new FootballManagerContext();
 
+            // context.Database.Initialize(true);
+
+            context.Teams.Add(new Team() {Name = "Barcelona"});
+            context.SaveChanges();
         }
     }
 }

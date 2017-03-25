@@ -1,3 +1,5 @@
+using FootballManager.Models;
+
 namespace FootballManager
 {
     using System;
@@ -21,6 +23,12 @@ namespace FootballManager
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
+
+        public virtual DbSet<Team> Teams { get; set; }
+
+        public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
+        public virtual DbSet<League> Leagues { get; set; }
     }
 
     //public class MyEntity

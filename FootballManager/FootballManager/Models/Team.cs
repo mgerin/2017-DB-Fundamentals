@@ -15,7 +15,7 @@ namespace FootballManager.Models
         }
         public int TeamId { get; set; }
         public string Name { get; set; }
-        public ICollection<Player> Players { get; set; }
-        public ICollection<League> Leagues { get; set; }
+        public virtual ICollection<Player> Players { get; set; }
+        public virtual ICollection<League> Leagues { get; set; }
     }
 }
