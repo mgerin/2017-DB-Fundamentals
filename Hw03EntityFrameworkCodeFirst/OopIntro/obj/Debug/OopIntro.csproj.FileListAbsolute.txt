@@ -1,0 +1,6 @@
+c:\users\marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.exe.config
+C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.exe
+C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.pdb
+C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.csprojResolveAssemblyReference.cache
+C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.exe
+C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.pdb
