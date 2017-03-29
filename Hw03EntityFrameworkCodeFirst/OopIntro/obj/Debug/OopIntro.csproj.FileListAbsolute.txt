@@ -4,3 +4,9 @@ C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirs
 C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.csprojResolveAssemblyReference.cache
 C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.exe
 C:\Users\Marin\documents\visual studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.pdb
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.exe.config
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.exe
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.pdb
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.exe
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\bin\Debug\OopIntro.pdb
+C:\Users\Marvik-PC\Documents\Visual Studio 2015\Projects\Hw03EntityFrameworkCodeFirst\OopIntro\obj\Debug\OopIntro.csprojResolveAssemblyReference.cache
